@@ -119,3 +119,41 @@ def sort_students_into_grades(student_list: list) -> dict:
 # TODO: Create test driver for blackbox tested functions
 # TODO: Create test driver to test all functions
 
+import unittest
+
+class TestFunctions(unittest.TestCase):
+
+    def test_gcd(self):
+
+        self.assertEqual(gcd(10, 5), 5, 'Expected gcd of 10 and 5 to be 5.')
+        self.assertEqual(gcd(13, 17), 1, 'Expected gcd of 13 and 17 to be 1.')
+        self.assertEqual(gcd(1000, 100), -1, 'Expected gcd of 1000 and 100 to be -1, as 1000 is not a valid input.')
+        self.assertEqual(gcd(500, 1000), -1, 'Expected gcd of 500 and 1000 to be -1, as 1000 is not a valid input.')
+        self.assertEqual(gcd(-10, 5), -1, 'Expected gcd of -10 and 5 to be -1, as negative values are not valid input.')
+
+    def test_replace(self):
+
+        self.assertEqual(replace("hello world", "world", "python"), "hello python", 'Expected replacement of "world" with "python".')
+        self.assertEqual(replace("hello hello", "hello", "world"), "world world", 'Expected replacement of all "hello" with "world".')
+        self.assertEqual(replace("hello", "world", "python"), "hello", 'Expected no replacement as target string is not in the input string.')
+        self.assertEqual(replace("", "world", "python"), "", 'Expected no replacement as input string is empty.')
+
+    def test_grade_letter(self):
+
+        self.assertEqual(grade_letter(95), "A", 'Expected letter grade for score 95 to be A.')
+        self.assertEqual(grade_letter(85), "B", 'Expected letter grade for score 85 to be B.')
+        self.assertEqual(grade_letter(75), "C", 'Expected letter grade for score 75 to be C.')
+        self.assertEqual(grade_letter(65), "D", 'Expected letter grade for score 65 to be D.')
+        self.assertEqual(grade_letter(55), "F", 'Expected letter grade for score 55 to be F.')
+        self.assertEqual(grade_letter(105), "Invalid", 'Expected "Invalid" for score 105 as it is out of range.')
+        self.assertEqual(grade_letter(-5), "Invalid", 'Expected "Invalid" for score -5 as it is out of range.')
+
+    def test_sort_students_into_grades(self):
+
+        students = [{"name": "Alice", "grade": "A"}, {"name": "Bob", "grade": "B"}, {"name": "Charlie", "grade": "Z"}]
+        expected_result = {"A": ["Alice"], "B": ["Bob"], "C": [], "D": [], "F": [], "Invalid": ["Charlie"]}
+        self.assertEqual(sort_students_into_grades(students), expected_result, 'Expected students to be sorted into respective grade letters.')
+
+if __name__ == "__main__":
+
+    unittest.main()
